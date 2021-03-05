@@ -1,0 +1,6 @@
+record(lsi, "$(user):motorThorLabsApt:version") {
+    field(DTYP, "motorThorLabsApt version")
+    field(DESC, "Version string")
+    field(SIZV, "$(SIZV=200)")
+    field(PINI, "YES")
+}
