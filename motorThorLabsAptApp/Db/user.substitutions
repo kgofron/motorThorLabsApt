@@ -14,3 +14,10 @@ file db/dbExample2.db {
         { "kaz", 2, "2 second" }
         { "kaz", 3, "5 second" }
 }
+
+file db/thorLabsApt.db {
+    pattern { P, R, PORT, ADDR, TIMEOUT, LSCALE, UNIT }
+        { "KBD101", "{DDSM100-1}", "KBD", 0, 0, 10, "mm" }
+        { "KBD101", "{DDSM100-2}", "KBD", 0, 0, 10, "mm" }
+        { "KBD101", "{DDSM100-3}", "KBD", 0, 0, 10, "mm" }
+}

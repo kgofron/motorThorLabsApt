@@ -14,7 +14,6 @@ motorThorLabsApt_registerRecordDeviceDriver pdbbase
 ## Load record instances
 dbLoadTemplate "db/user.substitutions"
 dbLoadRecords "db/motorThorLabsAptVersion.db", "user=kaz"
-dbLoadRecords "db/dbSubExample.db", "user=kaz"
 
 #- Set this to see messages from mySub
 #var mySubDebug 1
