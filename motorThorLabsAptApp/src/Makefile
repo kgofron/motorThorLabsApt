@@ -12,6 +12,8 @@ USR_CPPFLAGS += -DUSE_TYPED_RSET
 LIBRARY_IOC += motorThorLabsAptSupport
 
 # Compile and add code to the support library
+INC += thorLabsAptMotorDriver.h
+motorThorLabsAptSupport_SRCS += thorLabsAptMotorDriver.cpp
 
 # Link locally-provided code into the support library,
 # rather than directly into the IOC application, that
