@@ -3,30 +3,20 @@ TOP=../..
 include $(TOP)/configure/CONFIG
 #----------------------------------------
 #  ADD MACRO DEFINITIONS BELOW HERE
+#========================================
 
 # Use typed rset structure (see 3.16.1 release notes)
 USR_CPPFLAGS += -DUSE_TYPED_RSET
-
-# xxxRecord.h will be created from xxxRecord.dbd
-DBDINC += xxxRecord
-
-# Install xxxSupport.dbd into <top>/dbd
-DBD += xxxSupport.dbd
 
 # Build an IOC support library
 LIBRARY_IOC += motorThorLabsAptSupport
 
 # Compile and add code to the support library
-motorThorLabsAptSupport_SRCS += xxxRecord.c
-motorThorLabsAptSupport_SRCS += devXxxSoft.c
 
 # Link locally-provided code into the support library,
 # rather than directly into the IOC application, that
 # causes problems on Windows DLL builds
-motorThorLabsAptSupport_SRCS += dbSubExample.c
 motorThorLabsAptSupport_SRCS += devmotorThorLabsAptVersion.c
-motorThorLabsAptSupport_SRCS += motorThorLabsAptHello.c
-motorThorLabsAptSupport_SRCS += initTrace.c
 
 motorThorLabsAptSupport_LIBS += $(EPICS_BASE_IOC_LIBS)
 
@@ -44,11 +34,24 @@ DBD += motorThorLabsApt.dbd
 
 # motorThorLabsApt.dbd will include these files:
 motorThorLabsApt_DBD += base.dbd
-motorThorLabsApt_DBD += xxxSupport.dbd
-motorThorLabsApt_DBD += dbSubExample.dbd
 motorThorLabsApt_DBD += devmotorThorLabsAptVersion.dbd
-motorThorLabsApt_DBD += motorThorLabsAptHello.dbd
-motorThorLabsApt_DBD += initTrace.dbd
+
+# Include dbd files from all support applications:
+#ifdef ASYN
+motorThorLabsApt_DBD += asyn.dbd
+motorThorLabsApt_DBD += drvAsynSerialPort.dbd
+motorThorLabsApt_DBD += drvAsynIPPort.dbd
+#endif
+motorThorLabsApt_DBD += motorSupport.dbd
+
+# Add all the support libraries needed by this IOC
+motorThorLabsApt_LIBS += motor
+#ifdef ASYN
+motorThorLabsApt_LIBS += asyn
+#endif
+#ifdef SNCSEQ
+motorThorLabsApt_LIBS += seq pv
+#endif
 
 # motorThorLabsApt_registerRecordDeviceDriver.cpp derives from motorThorLabsApt.dbd
 motorThorLabsApt_SRCS += motorThorLabsApt_registerRecordDeviceDriver.cpp
@@ -59,26 +62,6 @@ motorThorLabsApt_SRCS_vxWorks += -nil-
 
 # Link in the code from our support library
 motorThorLabsApt_LIBS += motorThorLabsAptSupport
-
-# To build SNL programs, SNCSEQ must be defined
-# in the <top>/configure/RELEASE file
-ifneq ($(SNCSEQ),)
-    # Build sncExample into motorThorLabsAptSupport
-    sncExample_SNCFLAGS += +r
-    motorThorLabsApt_DBD += sncExample.dbd
-    # A .stt sequence program is *not* pre-processed:
-    motorThorLabsAptSupport_SRCS += sncExample.stt
-    motorThorLabsAptSupport_LIBS += seq pv
-    motorThorLabsApt_LIBS += seq pv
-
-    # Build sncProgram as a standalone program
-    PROD_HOST += sncProgram
-    sncProgram_SNCFLAGS += +m
-    # A .st sequence program *is* pre-processed:
-    sncProgram_SRCS += sncProgram.st
-    sncProgram_LIBS += seq pv
-    sncProgram_LIBS += $(EPICS_BASE_HOST_LIBS)
-endif
 
 # Link QSRV (pvAccess Server) if available
 ifdef EPICS_QSRV_MAJOR_VERSION
