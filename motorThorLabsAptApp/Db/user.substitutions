@@ -1,20 +1,5 @@
 # Example substitutions file
 
-file "db/circle.db" {
-    { user = "kaz" }
-}
-
-file "db/dbExample1.db" {
-    { user = "kaz" }
-}
-
-file db/dbExample2.db {
-    pattern { user, no, scan }
-        { "kaz", 1, "1 second" }
-        { "kaz", 2, "2 second" }
-        { "kaz", 3, "5 second" }
-}
-
 file db/thorLabsApt.db {
     pattern { P, R, PORT, ADDR, TIMEOUT, LSCALE, UNIT }
         { "KBD101", "{DDSM100-1}", "KBD", 0, 0, 10, "mm" }
