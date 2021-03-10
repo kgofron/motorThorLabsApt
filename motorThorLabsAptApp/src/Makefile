@@ -45,6 +45,7 @@ motorThorLabsApt_DBD += drvAsynSerialPort.dbd
 motorThorLabsApt_DBD += drvAsynIPPort.dbd
 #endif
 motorThorLabsApt_DBD += motorSupport.dbd
+motorThorLabsApt_DBD += devThorLabsAptMotor.dbd
 
 # Add all the support libraries needed by this IOC
 motorThorLabsApt_LIBS += motor

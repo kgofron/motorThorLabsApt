@@ -6,6 +6,7 @@
     Support for it could be added easily, though, and additions to the code are welcome.
 */
 
+// #include "thorlabs_apt_driver.h"
 #include "thorLabsAptMotorDriver.h"
 #include <asynDriver.h>
 #include <iocsh.h>
