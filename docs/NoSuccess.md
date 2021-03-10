@@ -1,3 +1,6 @@
+# APT unsuccessful
+
+```
 kaz@kaz-desktop:/epics/iocs/motorThorLabsApt/iocBoot/iocmotorThorLabsApt$ ./st.cmd 
 #!../../bin/linux-x86_64/motorThorLabsApt
 < envPaths
@@ -196,3 +199,4 @@ ASG :               DESC:               DISA: 0             DISP: 0
 DISV: 1             NAME: KBD101{DDSM100-1}Ch1:CurrentPosition                  
 RVAL: 0             SEVR: INVALID       STAT: UDF           SVAL: 0             
 TPRO: 0             VAL : 0             
+```
