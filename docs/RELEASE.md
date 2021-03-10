@@ -12,8 +12,8 @@ R1-0 is an initial release based on the master branch.
 #### New features 
 * motorThorLabsApt is built as stand alone ioc and outside of the motor directory.
 * motorThorLabsApt uses APT communication (not Kinesis).
-  * Switching between Kinesis (Windows app) and USB/APT (on windows) requires physical reboot of the computer.
-  * Drieve development and testing was done only on Linux (Debian 10), but might work on windows as well.
+  * Switching between Kinesis (Windows app) and USB/APT (on windows) requires physical reboot of the computer AFAIK.
+  * Driver development and testing was done only on Linux (Debian 10), but might work on windows.
 
 #### Modifications to existing features
 * None
