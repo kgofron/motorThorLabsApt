@@ -10,7 +10,7 @@ R1-0 is an initial release based on the master branch.
 * opi screens
 
 #### New features 
-* motorThorLabsApt is built as stand alone ioc and outside of the motor directory
+* motorThorLabsApt is built as stand alone ioc and outside of the motor directory, and uses APT communication (not Kinesis). Switching between Kinesis (Windows app) and APT (on windows) requires physical reboot of the computer.
 
 #### Modifications to existing features
 * None

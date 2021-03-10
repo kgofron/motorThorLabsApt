@@ -2,6 +2,10 @@
 * Autor: K. Gofron
 * Date:  2021-3-9
 * Based on: asynPortDriver class
+* Hardware tested
+  * Controller: ThorLabs KBD101
+  * Motion stage: ThorLabs DDSM100
+  * Communication: APT (not Kinesis)
 
 ## ioc start
 ```
