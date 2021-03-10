@@ -1,5 +1,5 @@
 # Thorlabs APT driver
-* Autor: K. Gofron
+* Author: K. Gofron
 * Date:  2021-3-9
 * Based on: asynPortDriver class
 * Hardware tested
