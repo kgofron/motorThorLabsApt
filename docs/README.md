@@ -65,6 +65,9 @@ Starting iocInit
 iocRun: All initialization complete
 ## Start any sequence programs
 #seq sncExample, "user=kaz"
+```
+## PV list
+```
 epics> dbl
 KBD101{DDSM100-1}Ch1:StatusForwardLimit
 KBD101{DDSM100-1}Ch1:StatusReverseLimit
@@ -177,48 +180,7 @@ RVAL: -5962         SEVR: NO_ALARM      STAT: NO_ALARM      SVAL: 0
 TPRO: 0             VAL : -59620        
 ```
 
-## PVs
-```
-epics> dbl
-KBD101{DDSM100-1}Ch1:StatusForwardLimit
-KBD101{DDSM100-1}Ch1:StatusReverseLimit
-KBD101{DDSM100-1}Ch1:StatusMovingForward
-KBD101{DDSM100-1}Ch1:StatusMovingReverse
-KBD101{DDSM100-1}Ch1:StatusHoming
-KBD101{DDSM100-1}Ch1:StatusHomed
-KBD101{DDSM100-1}Ch1:StatusEnabled
-thorLabsApt:alldone
-KBD101{DDSM100-1}Ch1:CurrentPosition
-KBD101{DDSM100-1}Ch1:CurrentVelocity
-kaz:motorThorLabsApt:version
-thorLabsApt:alldoneBlink
-KBD101{DDSM100-1}LastEventNotes
-KBD101{DDSM100-1}ModelNumber
-KBD101{DDSM100-1}Notes
-thorLabsApt:movingDiff
-thorLabsApt:moving
-KBD101{DDSM100-1}Ch1:MinVelocity
-KBD101{DDSM100-1}Ch1:Acceleration
-KBD101{DDSM100-1}Ch1:MaxVelocity
-KBD101{DDSM100-1}Ch1:Backlash
-KBD101{DDSM100-1}Ch1:MoveAbsolute
-KBD101{DDSM100-1}Ch1:Enabled
-KBD101{DDSM100-1}Ch1:MoveStop
-KBD101{DDSM100-1}Ch1:MoveHome
-thorLabsApt:allstop
-IOC:Asyn
-KBD101{DDSM100-1}NumEvents
-KBD101{DDSM100-1}LastEvent
-KBD101{DDSM100-1}SerialNumber
-KBD101{DDSM100-1}FirmwareVersionMajor
-KBD101{DDSM100-1}FirmwareVersionInterim
-KBD101{DDSM100-1}FirmwareVersionMinor
-KBD101{DDSM100-1}HardwareVersion
-KBD101{DDSM100-1}ModState
-KBD101{DDSM100-1}NumberChannels
-```
-
-## ioc Shell
+## ioc Shell commands
 ```
 epics> help
 Type 'help <command>' to see the arguments of <command>.
