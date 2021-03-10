@@ -15,13 +15,18 @@ motorThorLabsApt_registerRecordDeviceDriver pdbbase
 dbLoadTemplate "db/user.substitutions"
 dbLoadRecords "db/motorThorLabsAptVersion.db", "user=kaz"
 
-#- Set this to see messages from mySub
-#var mySubDebug 1
+## motorUtil (allstop & alldone)
+dbLoadRecords("$(MOTOR)/db/motorUtil.db", "P=thorLabsApt:")
+
+cd "${TOP}/iocBoot/${IOC}"
+# Uncomment one of the following lines for KDB101 or another controller
+#< thorLabsKDB101.iocsh
+< thorLabsKDB101.iocsh
 
 #- Run this to trace the stages of iocInit
 #traceIocInit
 
-cd "${TOP}/iocBoot/${IOC}"
+# cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
 ## Start any sequence programs
