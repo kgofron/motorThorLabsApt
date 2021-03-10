@@ -1,0 +1,28 @@
+### Motors
+# dbLoadTemplate "motor.substitutions.thorLabsKDB101"
+
+#drvAsynIPPortConfigure("APT_ETH", "10.0.1.200:55551", 0, 0, 0)
+#######  KDB101 via com-port #########################
+### use RS232 over USB, ttyUSB0, baud = 9600. 
+##
+#drvAsynSerialPortConfigure "COM1", "/dev/ttyS0"
+drvAsynSerialPortConfigure("IP1", "/dev/ttyUSB0", 0, 0, 0)
+ 
+#asynOctetSetInputEos "COM1",0,"\r"
+#asynOctetSetOutputEos "COM1",0,"\r"
+asynSetOption ("IP1", 0, "baud", "115200")
+#asynSetOption ("IP1", 0, "baud", "9600")
+asynSetOption ("IP1", 0, "bits", "8")
+asynSetOption ("IP1", 0, "parity", "none")
+asynSetOption ("IP1", 0, "stop", "1")
+asynSetOption ("IP1", 0, "clocal", "Y")
+asynSetOption ("IP1", 0, "crtscts", "N")
+
+dbLoadRecords("$(ASYN)/db/asynRecord.db", "P=IOC:, R=Asyn, PORT=IP1, ADDR=0, OMAX=256, IMAX=256")
+
+# PORT, APT_PORT, number of axes, active poll period (ms), idle poll period (ms)
+#MCS2CreateController("APT", "APT_ETH", 1, 100, 100)
+ThorlabsAPTConfigure("KBD", "IP1")
+
+#asynSetTraceMask("APT", 0, 255)
+asynSetTraceIOMask("KBD", -1, 0x8)
