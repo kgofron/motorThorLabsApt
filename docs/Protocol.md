@@ -68,3 +68,10 @@ This device came with Future Technology Devices International (FTDI), type FT232
   * dest: | 0x80 the destination module logic OR’d with 0x80 (noted by d|)
   * source: the source of the data
     
+* Source / Destination {non-card-slot}
+  * src  = 0x01 {host}
+  * dest = 0x50 {generic USB unit}
+
+* Source / Destination {card-slot}
+  * See page 33/385 {send to motherboard with destination field of slot}
+
