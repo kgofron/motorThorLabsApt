@@ -37,13 +37,13 @@ This device came with Future Technology Devices International (FTDI), type FT232
 * Intel little endian format
   
 * Simple message: no data packet to follow
-
+```
 -------------------------------------------------------
-{| byte 0 | byte 1 | byte 2 | byte 3 | byte 4 | byte 5 |
- |--------|--------|--------|--------|--------|--------|
- | message ID      | param1 | param2 | dest   | source |}
- -------------------------------------------------------
-
+| byte 0 | byte 1 | byte 2 | byte 3 | byte 4 | byte 5 |
+|--------|--------|--------|--------|--------|--------|
+| message ID      | param1 | param2 | dest   | source |
+-------------------------------------------------------
+```
   * message ID: describes what the action the message requests
   * param1: first parameter (if the command requires a parameter, otherwise 0)
   * param2: second parameter (if the command requires a parameter, otherwise 0)
@@ -51,12 +51,12 @@ This device came with Future Technology Devices International (FTDI), type FT232
   * source: the source of the message
 
 * Complex message: data packet to follow
-
+```
 -------------------------------------------------------------
 | byte 0 | byte 1 | byte 2 | byte 3    | byte 4    | byte 5 |
 | message ID      | data packet length | dest|0x80 | source |
 -------------------------------------------------------------
-
+```
   * message ID: describes what the action the message requests
   * datapacket length: number of bytes to follow after header
     * Note: although this is a 2-byte long field, currently no datapacket exceeds 255 bytes in length.
