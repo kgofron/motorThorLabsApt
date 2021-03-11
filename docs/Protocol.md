@@ -57,7 +57,7 @@ This device came with Future Technology Devices International (FTDI), type FT232
 | message ID      | data packet length | dest|0x80 | source |
 -------------------------------------------------------------
 ```
-  * message ID: describes what the action the message requests
+  ** message ID: describes what the action the message requests
   * datapacket length: number of bytes to follow after header
     * Note: although this is a 2-byte long field, currently no datapacket exceeds 255 bytes in length.
   * dest: | 0x80 the destination module logic OR’d with 0x80 (noted by d|)
