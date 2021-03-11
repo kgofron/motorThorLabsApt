@@ -5,12 +5,11 @@
 * User Guide APT: https://www.thorlabs.com/drawings/6d057d00f144dd5c-5B951A3C-C8ED-2099-EFA9FD3C443C4BCA/KBD101-KBD101ManualforAPT.pdf
 * User Guide Kinesis: https://www.thorlabs.com/drawings/6d057d00f144dd5c-5B951A3C-C8ED-2099-EFA9FD3C443C4BCA/KBD101-KBD101ManualforKinesis.pdf
 
+## KBD101
 This device came with Future Technology Devices International (FTDI), type FT232BM USB chip.
-
 * Low level protocol
   * USB2.0 FT232BM/FTDI chip
   * RS232
-
 * Note: Beware of USB enumeration scheme.
 
 ========================================
