@@ -78,8 +78,19 @@ This device came with Future Technology Devices International (FTDI), type FT232
 ======================================
 ### Message exchange rules
 
-* No information from the sub-module (set digital outputs).
-1. Host issues a command,
-2. sub-module carries out the command without acknowledgement
-   1. no response is sent back to the host.
+A. No information from the sub-module (set digital outputs).
+   1. Host issues a command,
+   2. Sub-module carries out the command without acknowledgement
+      1. no response is sent back to the host.
+B. SET -> REQUEST -> GET. {Request the sub-module to report the state of the digital inputs}
+   1. Host issues a command (message request)
+   2. Sub-module responds by sending data back to the host.
+
+C. Status update messages (sent automatically every 100 msec from the sub-module to the host).
+   1. Command from the host,
+   2. Sub-module periodically sends a message to the host without further prompting.
+
+D. Error messages, exceptions (rearly).
+   1. Spontaneously issued by the sub-module if some error occurs.
+      1. Power supply fails in the sub-module, a message is sent to the host PC to inform the user.
 
