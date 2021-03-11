@@ -78,6 +78,7 @@ This device came with Future Technology Devices International (FTDI), type FT232
 ======================================
 ### Message exchange rules
 
+* No information from the sub-module (set digital outputs).
 1. Host issues a command,
 2. sub-module carries out the command without acknowledgement
    1. no response is sent back to the host.
