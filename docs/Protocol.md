@@ -110,5 +110,23 @@ D. Error messages, exceptions (rearly).
 ### Single Precision Floating Point Format
 * floating-point format is a computer number format that occupies 4 bytes (32 bits).
 
-### Conversion
-  * (position, velocity and acceleration values) in standard physical units and their equivalent APT parameters
+### Conversion (EncCnt)
+  * Standard physical (position, velocity and acceleration) values and their equivalent APT parameters.
+  * Brushless DC Controller (TBD001, KBD101, BBD10X and BBD20X) driven stages
+    * Mathematically:
+       1. POSAPT = EncCnt × Pos
+       2. VELAPT = EncCnt × T × 65536 × Vel
+       3. ACCAPT = EncCnt × T2 × 65536 × Acc
+       	  * where T = 102.4 × 10-6
+
+  * Linear Stages
+    * The value of EncCnt and the resulting conversion factors are listed below for each stage:
+```
+-------------------------------------------------------------------
+| Stage   | EncCnt per mm |          Scaling Factor    	       	   |
+|         |               | Velocity (mm/s) | Acceleration (mm/s2) |
+|---------|---------------|-----------------|----------------------|
+| DDSM100 | 2000 	  | 13421.77 	    | 1.374	  	   |
+|------------------------------------------------------------------|
+```
+
