@@ -40,7 +40,7 @@ This device came with Future Technology Devices International (FTDI), type FT232
 
 -------------------------------------------------------
 | byte 0 | byte 1 | byte 2 | byte 3 | byte 4 | byte 5 |
-|--------|--------|--------|--------|--------|--------|
+|-----------------|--------|--------|--------|--------|
 | message ID      | param1 | param2 | dest   | source |
 -------------------------------------------------------
 
