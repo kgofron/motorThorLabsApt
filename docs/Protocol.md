@@ -12,6 +12,7 @@ This device came with Future Technology Devices International (FTDI), type FT232
   * RS232
 
 * Note: Beware of USB enumeration scheme.
+
 ========================================
 
 * USB communication settings
