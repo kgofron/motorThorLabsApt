@@ -107,3 +107,8 @@ D. Error messages, exceptions (rearly).
 | char   | 1 byte (2 digits) |
 | char[N] | string of N characters |
 
+### Single Precision Floating Point Format
+* floating-point format is a computer number format that occupies 4 bytes (32 bits).
+
+### Conversion
+  * (position, velocity and acceleration values) in standard physical units and their equivalent APT parameters
