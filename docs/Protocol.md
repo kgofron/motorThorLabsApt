@@ -37,8 +37,10 @@ This device came with Future Technology Devices International (FTDI), type FT232
 * Intel little endian format
   
 * Simple message: no data packet to follow
+
 -------------------------------------------------------
 | byte 0 | byte 1 | byte 2 | byte 3 | byte 4 | byte 5 |
+|--------|--------|--------|--------|--------|--------|
 | message ID      | param1 | param2 | dest   | source |
 -------------------------------------------------------
 
@@ -49,6 +51,7 @@ This device came with Future Technology Devices International (FTDI), type FT232
   * source: the source of the message
 
 * Complex message: data packet to follow
+
 -------------------------------------------------------------
 | byte 0 | byte 1 | byte 2 | byte 3    | byte 4    | byte 5 |
 | message ID      | data packet length | dest|0x80 | source |
@@ -60,4 +63,3 @@ This device came with Future Technology Devices International (FTDI), type FT232
   * dest: | 0x80 the destination module logic OR’d with 0x80 (noted by d|)
   * source: the source of the data
     
-  source: the source of the data
