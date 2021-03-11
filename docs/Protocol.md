@@ -75,3 +75,10 @@ This device came with Future Technology Devices International (FTDI), type FT232
 * Source / Destination {card-slot}
   * See page 33/385 {send to motherboard with destination field of slot}
 
+======================================
+### Message exchange rules
+
+1. Host issues a command,
+2. sub-module carries out the command without acknowledgement
+   i. no response is sent back to the host.
+
