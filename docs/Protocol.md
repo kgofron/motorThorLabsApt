@@ -119,8 +119,8 @@ D. Error messages, exceptions (rearly).
        3. ACCAPT = EncCnt × T2 × 65536 × Acc
        	  * where T = 102.4 × 10-6
 
-  * Linear Stages
-    * The value of EncCnt and the resulting conversion factors are listed below for each stage:
+    * Linear Stages (KBD101)
+      * The value of EncCnt and the resulting conversion factors are listed below for each stage:
 ```
 -------------------------------------------------------------------
 | Stage   | EncCnt per mm |          Scaling Factor    	       	   |
