@@ -96,3 +96,14 @@ D. Error messages, exceptions (rearly).
       1. Power supply fails in the sub-module, a message is sent to the host PC to inform the user.
 
 =======================================
+### Format specifiers
+
+| format | encoding |
+|--------|----------|
+| word   | Unsigned 16 bit integer (2 bytes) in the Intel (little-endian) format for example decimal 12345 (3039H) is encoded as the byte sequence 39, 30 |
+| short  | Signed 16 bit integer (2 bytes) in 2’s compliment format for example decimal -1 is encoded as the byte sequence FF, FF |
+| dword  | Unsigned 32 bit integer (4 bytes) in the Intel (little-endian) format for example decimal 123456789 (75BCD15H) is encoded as the byte sequence 15, CD, 5B, 07 |
+| long   | Signed 32 bit integer (4 bytes) in 2’s compliment format for example decimal -1 is encoded as the byte sequence FF, FF 4 bytes in the Intel (little-endian) format for example decimal -123456789 (FFFFFFFFF8A432EBH) is encoded as the byte sequence EB, 32, A4, F8, |
+| char   | 1 byte (2 digits) |
+| char[N] | string of N characters |
+
