@@ -18,7 +18,7 @@ asynSetOption ("IP1", 0, "stop", "1")
 asynSetOption ("IP1", 0, "clocal", "Y")
 asynSetOption ("IP1", 0, "crtscts", "N")
 
-dbLoadRecords("$(ASYN)/db/asynRecord.db", "P=IOC:, R=Asyn, PORT=IP1, ADDR=0, OMAX=256, IMAX=256")
+dbLoadRecords("$(ASYN)/db/asynRecord.db", "P=$(Sys)$(Dev), R=Asyn, PORT=IP1, ADDR=0, OMAX=256, IMAX=256")
 
 # PORT, APT_PORT, number of axes, active poll period (ms), idle poll period (ms)
 #MCS2CreateController("APT", "APT_ETH", 1, 100, 100)
