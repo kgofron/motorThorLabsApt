@@ -27,10 +27,12 @@ This device came with Future Technology Devices International (FTDI), type FT232
   * Reset device.
   * Set flow control to RTS/CTS.
   * Set RTS.
+
 =========================================
 * USB Device Enumeration
   * Read 8 digit USB S/N from USB device descriptor
     * 28xxxxxx = KBD101, controller type 1st two digits
+
 =========================================
 
 ## Communication Protocol
