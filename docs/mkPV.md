@@ -1,6 +1,12 @@
 # PV - Absolute Move
 
 * thorLabsAptMotorDriver.cpp:38:#define MGMSG_MOT_MOVE_ABSOLUTE         0x0453
+```
+#define MGMSG_MOT_SET_MOVEABSPARAMS     0x0450
+#define MGMSG_MOT_REQ_MOVEABSPARAMS     0x0451
+#define MGMSG_MOT_GET_MOVEABSPARAMS     0x0452
+#define MGMSG_MOT_MOVE_ABSOLUTE         0x0453
+```
 * thorLabsAptMotorDriver.cpp:509:        return sendShortCommand(MGMSG_MOT_MOVE_ABSOLUTE);
     * thorLabsAptMotorDriver.cpp:35:#define MGMSG_MOT_SET_MOVEABSPARAMS	0x0450
 ```
