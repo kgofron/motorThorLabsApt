@@ -17,4 +17,4 @@ Chan Ident: 01, 00: Channel 1 (always set to 1 for TDC001)
 Rel Dist: 40, 0D, 03, 00: Set absolute move distance to 10 mm (200,000 encoder counts).
 ```
 * NOTE
-DEC(200,000) = HEX(00 03 0D 40).
+  * DEC(200,000) = HEX(00 03 0D 40).
