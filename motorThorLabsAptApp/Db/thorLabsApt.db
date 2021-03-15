@@ -161,3 +161,10 @@ record (bo, "$(P)$(R)Ch1:MoveHome") {
     field (DTYP, "asynInt32")
     field (OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT))MOVE_HOME")
 }
+record (ao, "$(P)$(R)Ch1:MoveRelative") {
+    field (DTYP, "asynInt32")
+    field (OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT))MOVE_RELATIVE")
+    field (ASLO, "$(LSCALE)")
+    field (EGU, "$(UNIT)")
+    field (PREC, 2)
+}

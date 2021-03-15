@@ -38,6 +38,8 @@ class asynUser;
 #define P_MoveStop_String "MOVE_STOP"
 #define P_MoveHome_String "MOVE_HOME"
 
+#define P_MoveRelative_String "MOVE_RELATIVE"
+
 class ThorlabsAPTDriver : public asynPortDriver {
 public:
     ThorlabsAPTDriver(const char *portName, const char *serialPortName);
@@ -88,6 +90,8 @@ protected:
     int P_MoveAbsolute;
     int P_MoveStop;
     int P_MoveHome;
+
+    int P_MoveRelative;
 
     asynUser *asynUserSerial;
 };

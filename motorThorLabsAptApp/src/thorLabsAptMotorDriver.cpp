@@ -160,6 +160,7 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     printf("ThorlabsAPT: model %s; fw ver %u.%u.%u; hw ver %u; %u channels\n", modelNumber, data[16], data[15], data[14], hardwareVersion, numberChannels);
 
     createParam(P_MoveAbsolute_String, asynParamInt32, &P_MoveAbsolute);
+    createParam(P_MoveRelative_String, asynParamInt32, &P_MoveRelative);    
     createParam(P_MoveStop_String, asynParamInt32, &P_MoveStop);
     createParam(P_MoveHome_String, asynParamInt32, &P_MoveHome);
     
@@ -216,6 +217,22 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     }
     setIntegerParam(P_MoveAbsolute, (data[5] << 24) | (data[4] << 16) | (data[3] << 8) | data[2]);
     free(data);
+
+    // Channel 1: Get destination of last relative move command
+    sendShortCommand(MGMSG_MOT_REQ_MOVERELPARAMS, 1, 0);
+    status = waitForReply(MGMSG_MOT_GET_MOVERELPARAMS, (char **) &data, &dataLen);
+    if (status == asynTimeout) {
+        pasynManager->unlockPort(asynUserSerial);
+        printf("ThorlabsAPT: timeout waiting for message MGMSG_MOT_GET_MOVERELPARAMS\n");
+        return;
+    }
+    if (dataLen != 6) {
+        pasynManager->unlockPort(asynUserSerial);
+        printf("ThorlabsAPT: malformed message MGMSG_MOT_GET_MOVERELPARAMS\n");
+        return;
+    }
+    setIntegerParam(P_MoveRelative, (data[5] << 24) | (data[4] << 16) | (data[3] << 8) | data[2]);
+    free(data);    
 
     // Channel 1: Get general move parameters (backlash)
     sendShortCommand(MGMSG_MOT_REQ_GENMOVEPARAMS, 1, 0);
@@ -513,6 +530,17 @@ asynStatus ThorlabsAPTDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
         data[5] = value >> 24;
         sendLongCommand(MGMSG_MOT_SET_MOVEABSPARAMS, data, 6);
         return sendShortCommand(MGMSG_MOT_MOVE_ABSOLUTE);
+    } else if (function == P_MoveRelative) {
+        setIntegerParam(P_MoveRelative, value);
+        unsigned char data[6];
+        data[0] = 1;
+        data[1] = 0;
+        data[2] = value;
+        data[3] = value >> 8;
+        data[4] = value >> 16;
+        data[5] = value >> 24;
+        sendLongCommand(MGMSG_MOT_SET_MOVERELPARAMS, data, 6);
+        return sendShortCommand(MGMSG_MOT_MOVE_RELATIVE);          
     } else if (function == P_MoveStop) {
     	return sendShortCommand(MGMSG_MOT_MOVE_STOP, 1, 2);
     } else if (function == P_MoveHome) {
