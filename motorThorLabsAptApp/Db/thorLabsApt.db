@@ -114,36 +114,43 @@ record (bi, "$(P)$(R)Ch1:StatusForwardLimit") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000001,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
 }
 record (bi, "$(P)$(R)Ch1:StatusReverseLimit") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000002,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
 }
 record (bi, "$(P)$(R)Ch1:StatusMovingForward") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000010,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
 }
 record (bi, "$(P)$(R)Ch1:StatusMovingReverse") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000020,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
 }
 record (bi, "$(P)$(R)Ch1:StatusHoming") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000200,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
 }
 record (bi, "$(P)$(R)Ch1:StatusHomed") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000400,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
 }
 record (bi, "$(P)$(R)Ch1:StatusEnabled") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x80000000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
 }
 
 record (ao, "$(P)$(R)Ch1:MoveAbsolute") {
@@ -167,4 +174,4 @@ record (ao, "$(P)$(R)Ch1:MoveRelative") {
     field (ASLO, "$(LSCALE)")
     field (EGU, "$(UNIT)")
     field (PREC, 2)
-}
+}    field (PINI,"YES")
