@@ -174,4 +174,14 @@ record (ao, "$(P)$(R)Ch1:MoveRelative") {
     field (ASLO, "$(LSCALE)")
     field (EGU, "$(UNIT)")
     field (PREC, 2)
-}    field (PINI,"YES")
+} 
+
+record (calcout, "$(P)$(R)Ch1:Pos_") {
+  field (DESC, "CurrentPosition")
+  field (CALC, "b/20000")
+  field (INPB, "$(P)$(R)Ch1:CurrentPosition")
+  field (OUT, "$(P)$(R)Ch1:TWP")
+  field (SCAN, "1 second")
+  field (PREC, "5")
+  field (EGU, "mm")
+}
