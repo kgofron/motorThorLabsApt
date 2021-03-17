@@ -40,7 +40,7 @@
 #define MGMSG_MOT_REQ_DCSTATUSUPDATE    0x0490
 #define MGMSG_MOT_GET_DCSTATUSUPDATE    0x0491
 
-// yet to be implemented: KG-21/3/12
+// implemented: KG-21/3/12
 #define MGMSG_MOT_SET_MOVERELPARAMS     0x0445
 #define MGMSG_MOT_REQ_MOVERELPARAMS     0x0446
 #define MGMSG_MOT_GET_MOVERELPARAMS     0x0447
@@ -397,9 +397,15 @@ void ThorlabsAPTDriver::processUnsolicitedMessage(unsigned short int messageId, 
     switch (messageId) {
         case MGMSG_HW_RESPONSE: {
             int numEvents;
-            getIntegerParam(P_NumEvents, &numEvents);
-            setIntegerParam(P_NumEvents, numEvents + 1);
-            setIntegerParam(P_LastEvent, extraData[1] << 8 | extraData[0]);
+            getIntegerParam(P_NumEvents, record (calcout, "$(P)$(R)Ch1:Pos_") {
+  field (DESC, "CurrentPosition")
+  field (CALC, "b/2000")
+  field (INPB, "$(P)$(R)Ch1:CurrentPosition")
+  field (OUT, "$(P)$(R)Ch1:TWP")
+  field (SCAN, "1 second")
+  field (PREC, "4")
+  field (EGU, "mm")
+}extraData[1] << 8 | extraData[0]);
             callParamCallbacks();
             break;
         }
