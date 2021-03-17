@@ -397,15 +397,9 @@ void ThorlabsAPTDriver::processUnsolicitedMessage(unsigned short int messageId, 
     switch (messageId) {
         case MGMSG_HW_RESPONSE: {
             int numEvents;
-            getIntegerParam(P_NumEvents, record (calcout, "$(P)$(R)Ch1:Pos_") {
-  field (DESC, "CurrentPosition")
-  field (CALC, "b/2000")
-  field (INPB, "$(P)$(R)Ch1:CurrentPosition")
-  field (OUT, "$(P)$(R)Ch1:TWP")
-  field (SCAN, "1 second")
-  field (PREC, "4")
-  field (EGU, "mm")
-}extraData[1] << 8 | extraData[0]);
+            getIntegerParam(P_NumEvents, &numEvents);
+            setIntegerParam(P_NumEvents, numEvents + 1);
+            setIntegerParam(P_LastEvent, extraData[1] << 8 | extraData[0]);
             callParamCallbacks();
             break;
         }
