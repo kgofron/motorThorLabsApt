@@ -2,7 +2,7 @@
 
 file db/thorLabsApt.db {
     pattern { P, R, PORT, ADDR, TIMEOUT, LSCALE, VSCALE, ASCALE, UNIT }
-        { "KBD101", "{DDSM100-1}", "KBD", 0, 0, 10, 10, 10, "ct" }
+        { "KBD101", "{DDSM100-1}", "KBD", 0, 0, 0.0005, 0.000074506, 0.727802038, "mm" }
 #        { "KBD101", "{DDSM100-2}", "KBD", 0, 0, 10, 10, 10, "ct" }
 #        { "KBD101", "{DDSM100-3}", "KBD", 0, 0, 10, 10, 10, "ct" }
 }
