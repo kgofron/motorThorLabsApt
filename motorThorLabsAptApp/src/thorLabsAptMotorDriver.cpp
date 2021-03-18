@@ -45,6 +45,7 @@
 #define MGMSG_MOT_REQ_MOVERELPARAMS     0x0446
 #define MGMSG_MOT_GET_MOVERELPARAMS     0x0447
 #define MGMSG_MOT_MOVE_RELATIVE         0x0448
+#define MGMSG_MOD_IDENTIFY              0x0223
 
 // yet to be implemented:
 // S. 55
@@ -98,7 +99,10 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
 
     pasynManager->lockPort(asynUserSerial);
 
+    // Initialize: notify the controller of the source and destination addresses
     sendShortCommand(MGMSG_HW_NO_FLASH_PROGRAMMING);
+    // Identify hardware unit by flashing front panel
+    sendShortCommand(MGMSG_MOD_IDENTIFY);
 
     unsigned char *data;
     size_t dataLen;
@@ -129,6 +133,12 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     modelNumber[8] = 0;
     createParam(P_ModelNumber_String, asynParamOctet, &P_ModelNumber);
     setStringParam(P_ModelNumber, modelNumber);
+
+    // KBD101 is hardware type 16
+    unsigned int typeNumber = data[13] << 8 | data[12];
+    printf("controller hardware type=(%u, %u);\n", data[13], data[12]);
+    createParam(P_TypeNumber_String, asynParamInt32, &P_TypeNumber);
+    setIntegerParam(P_TypeNumber, typeNumber);
     
     createParam(P_FirmwareVersionMinor_String, asynParamInt32, &P_FirmwareVersionMinor);
     setIntegerParam(P_FirmwareVersionMinor, data[14]);
@@ -155,9 +165,9 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     createParam(P_NumberChannels_String, asynParamInt32, &P_NumberChannels);
     setIntegerParam(P_NumberChannels, numberChannels);
 
-    free(data);
+    printf("ThorlabsAPT: model %s; type (%u,%u); fw ver (%u.%u.%u); hw ver %u; %u channels\n", modelNumber, data[13], data[12], data[16], data[15], data[14], hardwareVersion, numberChannels);
 
-    printf("ThorlabsAPT: model %s; fw ver %u.%u.%u; hw ver %u; %u channels\n", modelNumber, data[16], data[15], data[14], hardwareVersion, numberChannels);
+    free(data);
 
     createParam(P_MoveAbsolute_String, asynParamInt32, &P_MoveAbsolute);
     createParam(P_MoveRelative_String, asynParamInt32, &P_MoveRelative);    

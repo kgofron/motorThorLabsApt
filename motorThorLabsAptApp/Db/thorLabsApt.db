@@ -24,6 +24,11 @@ record (stringin, "$(P)$(R)ModelNumber") {
     field (INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))MODEL_NUMBER")
     field (PINI, "YES")
 }
+record (longin, "$(P)$(R)TypeNumber") {
+    field (DTYP, "asynInt32")
+    field (INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE_NUMBER")
+    field (PINI, "YES")
+}
 record (longin, "$(P)$(R)FirmwareVersionMajor") {
     field (DTYP, "asynInt32")
     field (INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIRMWARE_VERSION_MAJOR")
@@ -110,43 +115,97 @@ record (ai, "$(P)$(R)Ch1:CurrentVelocity") {
     field (EGU, "$(UNIT)")
     field (PREC, "2")
 }
-record (bi, "$(P)$(R)Ch1:StatusForwardLimit") {
+record (bi, "$(P)$(R)Ch1:Sts-ForwardLimit") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000001,$(TIMEOUT))STATUS_BITS")
     field (PINI,"YES")
 }
-record (bi, "$(P)$(R)Ch1:StatusReverseLimit") {
+record (bi, "$(P)$(R)Ch1:Sts-ReverseLimit") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000002,$(TIMEOUT))STATUS_BITS")
     field (PINI,"YES")
 }
-record (bi, "$(P)$(R)Ch1:StatusMovingForward") {
+record (bi, "$(P)$(R)Ch1:Sts-MovingForward") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000010,$(TIMEOUT))STATUS_BITS")
     field (PINI,"YES")    
 }
-record (bi, "$(P)$(R)Ch1:StatusMovingReverse") {
+record (bi, "$(P)$(R)Ch1:Sts-MovingReverse") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000020,$(TIMEOUT))STATUS_BITS")
     field (PINI,"YES")
 }
-record (bi, "$(P)$(R)Ch1:StatusHoming") {
+record (bi, "$(P)$(R)Ch1:Sts-Connected") {
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x00000100,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")
+}
+record (bi, "$(P)$(R)Ch1:Sts-Homing") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000200,$(TIMEOUT))STATUS_BITS")
     field (PINI,"YES")
 }
-record (bi, "$(P)$(R)Ch1:StatusHomed") {
+record (bi, "$(P)$(R)Ch1:Sts-Homed") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x00000400,$(TIMEOUT))STATUS_BITS")
     field (PINI,"YES")
 }
-record (bi, "$(P)$(R)Ch1:StatusEnabled") {
+record (bi, "$(P)$(R)Ch1:Sts-Settled") {
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x00002000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-PosError") {
+    field (DESC, "Positioner Error")
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x00004000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-DigiP1") {
+    field (DESC, "Digital Input 1")
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x00100000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-DigiP2") {
+    field (DESC, "Digital Input 1")
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x00200000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-Overload") {
+    field (DESC, "Digital Input 1")
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x01000000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-PowerOK") {
+    field (DESC, "Digital Input 1")
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x10000000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-Active") {
+    field (DESC, "Digital Input 1")
+    field (SCAN, "I/O Intr")
+    field (DTYP, "asynUInt32Digital")
+    field (INP, "@asynMask($(PORT),$(ADDR),0x20000000,$(TIMEOUT))STATUS_BITS")
+    field (PINI,"YES")    
+}
+record (bi, "$(P)$(R)Ch1:Sts-Enabled") {
     field (SCAN, "I/O Intr")
     field (DTYP, "asynUInt32Digital")
     field (INP, "@asynMask($(PORT),$(ADDR),0x80000000,$(TIMEOUT))STATUS_BITS")

@@ -17,6 +17,7 @@ class asynUser;
 
 #define P_SerialNumber_String "SERIAL_NUMBER"
 #define P_ModelNumber_String "MODEL_NUMBER"
+#define P_TypeNumber_String "TYPE_NUMBER"
 #define P_FirmwareVersionMinor_String "FIRMWARE_VERSION_MINOR"
 #define P_FirmwareVersionInterim_String "FIRMWARE_VERSION_INTERIM"
 #define P_FirmwareVersionMajor_String "FIRMWARE_VERSION_MAJOR"
@@ -68,6 +69,7 @@ protected:
     
     int P_SerialNumber;
     int P_ModelNumber;
+    int P_TypeNumber;
     int P_FirmwareVersionMinor;
     int P_FirmwareVersionInterim;
     int P_FirmwareVersionMajor;
