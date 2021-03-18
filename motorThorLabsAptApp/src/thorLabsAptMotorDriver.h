@@ -17,6 +17,7 @@ class asynUser;
 
 #define P_SerialNumber_String "SERIAL_NUMBER"
 #define P_ModelNumber_String "MODEL_NUMBER"
+#define P_TypeNumber_String "TYPE_NUMBER"
 #define P_FirmwareVersionMinor_String "FIRMWARE_VERSION_MINOR"
 #define P_FirmwareVersionInterim_String "FIRMWARE_VERSION_INTERIM"
 #define P_FirmwareVersionMajor_String "FIRMWARE_VERSION_MAJOR"
@@ -37,6 +38,8 @@ class asynUser;
 #define P_MoveAbsolute_String "MOVE_ABSOLUTE"
 #define P_MoveStop_String "MOVE_STOP"
 #define P_MoveHome_String "MOVE_HOME"
+
+#define P_MoveRelative_String "MOVE_RELATIVE"
 
 class ThorlabsAPTDriver : public asynPortDriver {
 public:
@@ -66,6 +69,7 @@ protected:
     
     int P_SerialNumber;
     int P_ModelNumber;
+    int P_TypeNumber;
     int P_FirmwareVersionMinor;
     int P_FirmwareVersionInterim;
     int P_FirmwareVersionMajor;
@@ -88,6 +92,8 @@ protected:
     int P_MoveAbsolute;
     int P_MoveStop;
     int P_MoveHome;
+
+    int P_MoveRelative;
 
     asynUser *asynUserSerial;
 };

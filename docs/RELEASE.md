@@ -1,7 +1,11 @@
 # motorThorLabsApt Releases
 
+## __R1-1 (2021-03-16)
+Relative motion implemented in the driver.
+
 ## __R1-0 (2021-03-09)__
 R1-0 is an initial release based on the master branch.  
+This driver is based on asynPortDriver class, and is not using motorRecord.
 
 #### New features {TODO}
 * motorThorLabsApt as a standalone module, as well as a submodule of [motor](https://github.com/epics-modules/motor)

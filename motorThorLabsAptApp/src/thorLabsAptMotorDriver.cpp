@@ -32,13 +32,20 @@
 #define MGMSG_MOT_REQ_GENMOVEPARAMS     0x043B
 #define MGMSG_MOT_GET_GENMOVEPARAMS     0x043C
 #define MGMSG_MOT_MOVE_HOME             0x0443
-#define MGMSG_MOT_SET_MOVEABSPARAMS	0x0450
-#define MGMSG_MOT_REQ_MOVEABSPARAMS	0x0451
-#define MGMSG_MOT_GET_MOVEABSPARAMS	0x0452
+#define MGMSG_MOT_SET_MOVEABSPARAMS     0x0450
+#define MGMSG_MOT_REQ_MOVEABSPARAMS     0x0451
+#define MGMSG_MOT_GET_MOVEABSPARAMS     0x0452
 #define MGMSG_MOT_MOVE_ABSOLUTE         0x0453
 #define MGMSG_MOT_MOVE_STOP             0x0465
 #define MGMSG_MOT_REQ_DCSTATUSUPDATE    0x0490
 #define MGMSG_MOT_GET_DCSTATUSUPDATE    0x0491
+
+// implemented: KG-21/3/12
+#define MGMSG_MOT_SET_MOVERELPARAMS     0x0445
+#define MGMSG_MOT_REQ_MOVERELPARAMS     0x0446
+#define MGMSG_MOT_GET_MOVERELPARAMS     0x0447
+#define MGMSG_MOT_MOVE_RELATIVE         0x0448
+#define MGMSG_MOD_IDENTIFY              0x0223
 
 // yet to be implemented:
 // S. 55
@@ -92,7 +99,10 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
 
     pasynManager->lockPort(asynUserSerial);
 
+    // Initialize: notify the controller of the source and destination addresses
     sendShortCommand(MGMSG_HW_NO_FLASH_PROGRAMMING);
+    // Identify hardware unit by flashing front panel
+    sendShortCommand(MGMSG_MOD_IDENTIFY);
 
     unsigned char *data;
     size_t dataLen;
@@ -123,6 +133,12 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     modelNumber[8] = 0;
     createParam(P_ModelNumber_String, asynParamOctet, &P_ModelNumber);
     setStringParam(P_ModelNumber, modelNumber);
+
+    // KBD101 is hardware type 16
+    unsigned int typeNumber = data[13] << 8 | data[12];
+    printf("controller hardware type=(%u, %u);\n", data[13], data[12]);
+    createParam(P_TypeNumber_String, asynParamInt32, &P_TypeNumber);
+    setIntegerParam(P_TypeNumber, typeNumber);
     
     createParam(P_FirmwareVersionMinor_String, asynParamInt32, &P_FirmwareVersionMinor);
     setIntegerParam(P_FirmwareVersionMinor, data[14]);
@@ -149,11 +165,12 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     createParam(P_NumberChannels_String, asynParamInt32, &P_NumberChannels);
     setIntegerParam(P_NumberChannels, numberChannels);
 
+    printf("ThorlabsAPT: model %s; type (%u,%u); fw ver (%u.%u.%u); hw ver %u; %u channels\n", modelNumber, data[13], data[12], data[16], data[15], data[14], hardwareVersion, numberChannels);
+
     free(data);
 
-    printf("ThorlabsAPT: model %s; fw ver %u.%u.%u; hw ver %u; %u channels\n", modelNumber, data[16], data[15], data[14], hardwareVersion, numberChannels);
-
     createParam(P_MoveAbsolute_String, asynParamInt32, &P_MoveAbsolute);
+    createParam(P_MoveRelative_String, asynParamInt32, &P_MoveRelative);    
     createParam(P_MoveStop_String, asynParamInt32, &P_MoveStop);
     createParam(P_MoveHome_String, asynParamInt32, &P_MoveHome);
     
@@ -210,6 +227,22 @@ ThorlabsAPTDriver::ThorlabsAPTDriver(const char *portName, const char *serialPor
     }
     setIntegerParam(P_MoveAbsolute, (data[5] << 24) | (data[4] << 16) | (data[3] << 8) | data[2]);
     free(data);
+
+    // Channel 1: Get destination of last relative move command
+    sendShortCommand(MGMSG_MOT_REQ_MOVERELPARAMS, 1, 0);
+    status = waitForReply(MGMSG_MOT_GET_MOVERELPARAMS, (char **) &data, &dataLen);
+    if (status == asynTimeout) {
+        pasynManager->unlockPort(asynUserSerial);
+        printf("ThorlabsAPT: timeout waiting for message MGMSG_MOT_GET_MOVERELPARAMS\n");
+        return;
+    }
+    if (dataLen != 6) {
+        pasynManager->unlockPort(asynUserSerial);
+        printf("ThorlabsAPT: malformed message MGMSG_MOT_GET_MOVERELPARAMS\n");
+        return;
+    }
+    setIntegerParam(P_MoveRelative, (data[5] << 24) | (data[4] << 16) | (data[3] << 8) | data[2]);
+    free(data);    
 
     // Channel 1: Get general move parameters (backlash)
     sendShortCommand(MGMSG_MOT_REQ_GENMOVEPARAMS, 1, 0);
@@ -507,6 +540,17 @@ asynStatus ThorlabsAPTDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
         data[5] = value >> 24;
         sendLongCommand(MGMSG_MOT_SET_MOVEABSPARAMS, data, 6);
         return sendShortCommand(MGMSG_MOT_MOVE_ABSOLUTE);
+    } else if (function == P_MoveRelative) {
+        setIntegerParam(P_MoveRelative, value);
+        unsigned char data[6];
+        data[0] = 1;
+        data[1] = 0;
+        data[2] = value;
+        data[3] = value >> 8;
+        data[4] = value >> 16;
+        data[5] = value >> 24;
+        sendLongCommand(MGMSG_MOT_SET_MOVERELPARAMS, data, 6);
+        return sendShortCommand(MGMSG_MOT_MOVE_RELATIVE);          
     } else if (function == P_MoveStop) {
     	return sendShortCommand(MGMSG_MOT_MOVE_STOP, 1, 2);
     } else if (function == P_MoveHome) {
