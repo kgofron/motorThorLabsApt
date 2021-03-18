@@ -1,7 +1,14 @@
 # motorThorLabsApt Releases
 
 ## __R1-1 (2021-03-16)
-Relative motion implemented in the driver.
+* Relative motion implemented in the driver.
+* opi screen(s)
+* motor status PVs (Settled, PosError, DigiP1, DigiP2)
+* motorThorLabsApt standalone ioc
+* motor Stop/Home/Asyn 
+* bug fixes (FirmwareVersion)
+* Hardware Type PV
+* motorThorLabsApt version 
 
 ## __R1-0 (2021-03-09)__
 R1-0 is an initial release based on the master branch.  
