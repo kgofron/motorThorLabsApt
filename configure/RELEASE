@@ -21,7 +21,7 @@
 # Build variables that are NOT used in paths should be set in
 # the CONFIG_SITE file.
 
-SUPPORT=/epics/support
+SUPPORT=/epics/src/RHEL8/support
 # Variables and paths to dependent modules:
 #MODULES = /path/to/modules
 #MYMODULE = $(MODULES)/my-module
@@ -34,7 +34,7 @@ MOTOR = $(SUPPORT)/motor
 SNCSEQ = $(SUPPORT)/seq
 
 # EPICS_BASE should appear last so earlier modules can override stuff:
-EPICS_BASE = /epics/base
+EPICS_BASE = $(SUPPORT)/../base
 
 # Set RULES here if you want to use build rules from somewhere
 # other than EPICS_BASE:
