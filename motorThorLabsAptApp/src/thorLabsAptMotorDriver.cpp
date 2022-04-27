@@ -1,9 +1,13 @@
 /*
 	EPICS asyn driver for Thorlabs APT motor controllers
 	June 2018, M. W. Bruker
+	March 2021, K. J. Gofron
 
     Multi-channel hardware is currently unsupported because I don't have any.
     Support for it could be added easily, though, and additions to the code are welcome.
+
+    3/12/21: KG added relative motion
+    TODO:    Triggering requested by some beamlines
 */
 
 // #include "thorlabs_apt_driver.h"
